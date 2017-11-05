@@ -8,7 +8,7 @@ window.onload = function() {
  }; 
  
 function createPieces() { 
-	Tiles = $$('#puzzlearea div'); 
+	Tiles = $('#puzzlearea div'); 
  	var j = 0; 
  	var t = 3; 
  	for (var i = 0; i < Tiles.length; i++) { 
