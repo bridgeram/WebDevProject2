@@ -4,21 +4,21 @@ var Tiles = [];
 
 window.onload = function() { 
    createPieces(); 
-   $("shufflebutton").observe("click", shuffle); 
+    document.getElementById("shufflebutton").addEventListener("click", shuffle);
  }; 
  
 function createPieces() { 
-	Tiles = $('#puzzlearea div'); 
+	 Tiles = document.querySelectorAll("#puzzlearea div"); 
  	var j = 0; 
  	var t = 3; 
  	for (var i = 0; i < Tiles.length; i++) { 
  		for (var x = 0; x <= t; x++) { 
- 			Tiles[i].addClassName("puzzlepiece"); 
+ 			Tiles[i].setAttribute("class", "puzzlepiece");
  			Tiles[i].style.top = 100 * j + "px"; 
  			Tiles[i].style.left = 100 * x  + "px"; 
  			Tiles[i].style.backgroundPosition = -x * 100 + "px " + j * -100 + "px"; 
- 			Tiles[i].observe("click", moveTile); 
- 			Tiles[i].observe("mouseover", hover); 
+ 			Tiles[i].addEventListener("click", moveTile); 
+ 			Tiles[i].addEventListener("mouseover", hover); 
  			i++; 
  		} 
  		j++; 
@@ -29,22 +29,25 @@ function createPieces() {
  	} 
  }	 
 
- function hover(event) { 
- 	if (testNeighbour(this.style.left, this.style.top)) { 
- 		this.addClassName("movablepiece"); 
- 	} else if (this.hasClassName("movablepiece")) { 
- 		this.removeClassName("movablepiece"); 
+ 
+ function hover(event){
+     
+     if (testNeighbour(this.style.left, this.style.top)){
+         this.setAttribute("class", "puzzlepiece movablepiece");
+     }
+     else if (this.classList.contains("movablepiece")) { 
+ 		this.classList.remove("movablepiece"); 
  	} 
-} 
+ }
 
 function moveTileHelp(tile) { 
  	if (testNeighbour(tile.style.left, tile.style.top)) { 
- 		var holderX = tile.style.left; 
- 		var holderY = tile.style.top; 
+ 		var XX = tile.style.left; 
+ 		var YY = tile.style.top; 
  		tile.style.left = X + "px"; 
  		tile.style.top = Y + "px"; 
- 		X = parseInt(holderX); 
- 		Y = parseInt(holderY); 
+ 		X = parseInt(XX); 
+ 		Y = parseInt(YY); 
  	} 
 } 
 
@@ -64,6 +67,7 @@ function shuffle() {
 		holder = []; 
 	} 
 } 
+
 
 function testNeighbour(x, y) { 
  	if (Math.abs(Y - parseInt(y)) == 100) { 
